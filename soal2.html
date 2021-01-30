@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soal 2</title>
+  </head>
+  <body>
+    <label for="huruf">Huruf yang dihitung</label>
+    <input type="text" maxlength="1" id="huruf" />
+    <label for="kalimat">Kalimat yang akan di scan</label>
+    <input type="text" id="kalimat" />
+    <button id="submit">Submit</button>
+    <br />
+    <strong class="output"></strong>
+    <script>
+      const output = document.querySelector(".output");
+      document.querySelector("#submit").addEventListener("click", () => {
+        const inputHuruf = document.querySelector("#huruf").value;
+        const inputKalimat = document.querySelector("#kalimat").value;
+        const jumlahHuruf = inputKalimat.split(inputHuruf).length - 1;
+        output.innerText = `Hasil Hitung huruf “${inputHuruf}” muncul sebanyak  kali ${jumlahHuruf.toString()}`;
+      });
+    </script>
+  </body>
+</html>
