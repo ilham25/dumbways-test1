@@ -34,13 +34,16 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 
           <div class="d-flex gap-2">
-            <a href="#" class="btn btn-success">Login</a>
+            <a href="/login" class="btn btn-success">Login</a>
             <a href="#" class="btn btn-primary">Add School</a>
           </div>
         </div>
       </div>
     </nav>
 
+    <div class="container mt-2">
+      <div class="row" id="school-container"></div>
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -49,5 +52,51 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="./js/api.js"></script> -->
+    <script>
+      const schoolContainer = document.querySelector("#school-container");
+      const fetchSchool = async () => {
+        const response = await axios.get("http://localhost:3000/all");
+        const data = await response.data;
+
+        data.map((value, index) => {
+          const {
+            id,
+            npsn,
+            address,
+            name_school,
+            logo_school,
+            school_level,
+            user_id,
+          } = value;
+
+          schoolContainer.innerHTML = `
+          <div class="col-3 mb-2">
+          <div class="card">
+            <img
+              src="https://picsum.photos/150?random=${index}"
+              class="card-img-top"
+              alt="..."
+              style="max-height: 150px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">${name_school}</h5>
+              <p class="card-text">
+                ${school_level}
+              </p>
+              <a href="#" class="btn btn-primary">Detail</a>
+            </div>
+          </div>
+        </div>
+          `;
+        });
+        console.log(schoolContainer);
+      };
+
+      fetchSchool();
+    </script>
   </body>
 </html>
