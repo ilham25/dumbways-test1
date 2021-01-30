@@ -24,7 +24,7 @@ export default function DashboardPage({ history }) {
 
   useEffect(() => {
     getSchoolData();
-  }, []);
+  }, [schools]);
 
   return (
     <>
@@ -37,7 +37,9 @@ export default function DashboardPage({ history }) {
           variant="success"
           onClick={() => {
             logout();
-            history.push("/login");
+            if (window.confirm("Logout?")) {
+              history.push("/login");
+            }
           }}
         >
           Logout
@@ -55,6 +57,7 @@ export default function DashboardPage({ history }) {
               address={school.address}
               logo={school.logo_school}
               level={school.school_level}
+              usId={school.user_id}
             />
           ))}
         </Row>

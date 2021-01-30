@@ -55,6 +55,16 @@ app.post("/school", (req, res) => {
     }
   );
 });
+
+app.delete("/school/:id", (req, res) => {
+  sql.deleteData("school_tb", req.params.id, (result) => {
+    if (result.affectedRows > 0) {
+      res.send({ status: 200 });
+    } else {
+      res.send({ status: 500 });
+    }
+  });
+});
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });

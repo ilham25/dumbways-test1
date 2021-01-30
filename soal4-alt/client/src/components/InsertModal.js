@@ -12,9 +12,9 @@ export default function InsertModal({ show, handleClose }) {
   const handleInsert = async (insertData) => {
     const response = await api.post("/school", insertData);
     const data = await response.data;
-    // if (data.status === 200) {
-    //   console.log('sukses');
-    // }
+    if (data.status === 200) {
+      alert("Input Data Sukses");
+    }
   };
 
   const handleSubmit = (e) => {
@@ -23,6 +23,7 @@ export default function InsertModal({ show, handleClose }) {
     const TOKEN_KEY = "temp_key";
     const userId = JSON.parse(localStorage.getItem(TOKEN_KEY)).userId;
     handleInsert({ name, npsn, address, level, userId });
+    handleClose();
   };
 
   return (
@@ -41,6 +42,7 @@ export default function InsertModal({ show, handleClose }) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
+              required
             />
           </Form.Group>
 
@@ -53,6 +55,7 @@ export default function InsertModal({ show, handleClose }) {
               onChange={(e) => {
                 setNpsn(e.target.value);
               }}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -64,6 +67,7 @@ export default function InsertModal({ show, handleClose }) {
               onChange={(e) => {
                 setAddress(e.target.value);
               }}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -75,6 +79,7 @@ export default function InsertModal({ show, handleClose }) {
               onChange={(e) => {
                 setLevel(e.target.value);
               }}
+              required
             />
           </Form.Group>
         </Modal.Body>

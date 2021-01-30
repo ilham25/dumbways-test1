@@ -33,9 +33,17 @@ export default function Sql() {
     });
   };
 
+  const deleteData = (table, id, cb) => {
+    const query = `DELETE FROM ${table} WHERE id=?`;
+    db.query(query, id, (err, res) => {
+      if (err) throw err;
+      cb(res);
+    });
+  };
   return {
     getAll,
     get,
     insertSchool,
+    deleteData,
   };
 }
