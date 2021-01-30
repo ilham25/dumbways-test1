@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Button, Modal, Form } from "react-bootstrap";
 import api from "../utils/api";
 
-export default function InsertModal({ show, handleClose, update }) {
+export default function UpdateModal({ show, handleClose, schId }) {
   const [name, setName] = useState("");
   const [npsn, setNpsn] = useState("");
   const [address, setAddress] = useState("");
@@ -26,10 +26,19 @@ export default function InsertModal({ show, handleClose, update }) {
     handleClose();
   };
 
+  const getData = async () => {
+    const response = await api.get(`/school/${schId}`);
+    const data = await response.data;
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add School</Modal.Title>
+        <Modal.Title>Edit School</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>

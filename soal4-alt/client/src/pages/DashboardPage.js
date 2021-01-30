@@ -7,6 +7,7 @@ import api from "../utils/api";
 import TopBar from "../components/TopBar";
 import SchoolCard from "../components/SchoolCard";
 import InsertModal from "../components/InsertModal";
+import UpdateModal from "../components/UpdateModal";
 
 export default function DashboardPage({ history }) {
   const [schools, setSchools] = useState([]);
@@ -17,14 +18,19 @@ export default function DashboardPage({ history }) {
     setSchools(data);
   };
 
+  // Insert Modal Handler
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Update Modal Handler
+  const [editShow, setEditShow] = useState(false);
+  const handleEditClose = () => setEditShow(false);
+  const handleEditShow = () => setEditShow(false);
+
   useEffect(() => {
     getSchoolData();
-  }, [schools]);
+  }, []);
 
   return (
     <>
@@ -58,10 +64,17 @@ export default function DashboardPage({ history }) {
               logo={school.logo_school}
               level={school.school_level}
               usId={school.user_id}
+              handleShow={handleEditShow}
             />
           ))}
         </Row>
       </Container>
+
+      <InsertModal
+        show={editShow}
+        handleClose={handleEditClose}
+        update={getSchoolData}
+      />
       <InsertModal show={show} handleClose={handleClose} />
     </>
   );

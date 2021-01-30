@@ -10,6 +10,7 @@ export default function SchoolCard({
   address,
   npsn,
   usId,
+  handleShow,
 }) {
   const apiDelete = async (dataId) => {
     const response = await api.delete(`/school/${dataId}`);
@@ -43,7 +44,9 @@ export default function SchoolCard({
           <Card.Text>{level}</Card.Text>
           <Card.Text>{address}</Card.Text>
           <Button variant="primary mr-1">Detail</Button>
-          <Button variant="warning mr-1">Edit</Button>
+          <Button variant="warning mr-1" onClick={handleShow}>
+            Edit
+          </Button>
           <Button variant="danger" onClick={handleDelete}>
             Delete
           </Button>
