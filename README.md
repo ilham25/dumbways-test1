@@ -11,9 +11,9 @@
 
 > **Cara menjalankan aplikasi**
 
-- Buka file `soal1.html` di browser
+- Buka file `soal1.html` di browser.
 - Masukkan input tipe rumah dan lama kredit
-- Tekan tombol Submit
+- Tekan tombol **Submit**.
 
 # Soal 2
 
@@ -28,13 +28,24 @@
 
 > **Cara menjalankan aplikasi**
 
-- Buka file `soal2.html` di browser
+- Buka file `soal2.html` di browser.
 - Masukkan input huruf yang akan dihitung dan kalimat yang akan di scan.
-- Tekan tombol Submit
+- Tekan tombol **Submit**.
 
 # Soal 3
 
-...
+> **Stacks**
+
+- Javascript
+
+> **Software yang diperlukan**
+
+- NodeJS
+
+> **Cara menjalankan aplikasi**
+
+- Jalankan perintah `node soal3.js` di terminal.
+- Masukkan jumlah pola yang diinginkan lalu tekan enter.
 
 # Soal 4
 
@@ -52,8 +63,8 @@
 
 > **Cara menjalankan aplikasi**
 
-1. Buat database pada MySQL dengan nama `dumb_school`
-2. Masuk ke direktori `soal4`
+1. Buat database pada MySQL dengan nama `dumb_school`.
+2. Masuk ke direktori `soal4`.
 3. Import file `dumb_school.sql` ke database `dumb_school` yang telah dibuat tadi.
 4. Selanjutnya, install dependencies untuk server sekaligus menjalankan server. Masukkan perintah berikut :
 
