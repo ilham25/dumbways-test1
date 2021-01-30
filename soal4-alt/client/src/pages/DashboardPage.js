@@ -49,6 +49,7 @@ export default function DashboardPage({ history }) {
           {schools.map((school) => (
             <SchoolCard
               key={school.id}
+              id={school.id}
               name={school.name_school}
               npsn={school.npsn}
               address={school.address}

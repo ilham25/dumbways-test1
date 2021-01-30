@@ -1,12 +1,7 @@
-const TOKEN_KEY = "email";
+const TOKEN_KEY = "temp_key";
 
 export const login = (data) => {
-  localStorage.setItem(
-    TOKEN_KEY,
-    JSON.stringify({
-      email: data.email,
-    })
-  );
+  localStorage.setItem(TOKEN_KEY, JSON.stringify(data));
 };
 
 export const logout = () => {

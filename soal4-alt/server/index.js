@@ -25,6 +25,7 @@ app.post("/login", (req, res) => {
       if (result[0].password === password) {
         res.send({
           email,
+          id: result[0].id,
           status: 200,
         });
       } else {
@@ -41,8 +42,18 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/school", (req, res) => {
-  const { name, npsn, address, level } = req.body;
-  console.log({ name, npsn, address, level });
+  const { userId, name, npsn, address, level } = req.body;
+  console.log({ name, npsn, address, level, userId });
+  sql.insertSchool(
+    [parseInt(npsn), name, address, "logo.png", level, userId],
+    (result) => {
+      if (result.affectedRows > 0) {
+        res.send({ status: 200 });
+      } else {
+        res.send({ status: 500 });
+      }
+    }
+  );
 });
 app.listen(port, () => {
   console.log(`running on port ${port}`);

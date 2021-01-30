@@ -17,8 +17,12 @@ export default function Sql() {
     });
   };
 
-  const insertSchool = (data) => {
+  const insertSchool = (data, cb) => {
     const query = `INSERT INTO school_tb (npsn, name_school, address, logo_school, school_level, user_id) VALUES (?,?,?,?,?,?)`;
+    db.query(query, data, (err, res) => {
+      if (err) throw err;
+      cb(res);
+    });
   };
   const get = (table, data, cb) => {
     const { key, value } = data;
@@ -32,5 +36,6 @@ export default function Sql() {
   return {
     getAll,
     get,
+    insertSchool,
   };
 }

@@ -12,7 +12,6 @@ export default function InsertModal({ show, handleClose }) {
   const handleInsert = async (insertData) => {
     const response = await api.post("/school", insertData);
     const data = await response.data;
-
     // if (data.status === 200) {
     //   console.log('sukses');
     // }
@@ -21,7 +20,9 @@ export default function InsertModal({ show, handleClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ name, npsn, address, level });
-    handleInsert({ name, npsn, address, level });
+    const TOKEN_KEY = "temp_key";
+    const userId = JSON.parse(localStorage.getItem(TOKEN_KEY)).userId;
+    handleInsert({ name, npsn, address, level, userId });
   };
 
   return (

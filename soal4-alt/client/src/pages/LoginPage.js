@@ -21,7 +21,7 @@ function LoginPage({ history }) {
     const data = response.data;
 
     if (data.status === 200) {
-      login({ email });
+      login({ email, userId: data.id });
       history.push("/");
       clearForm();
     } else {
