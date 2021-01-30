@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soal 1</title>
+  </head>
+  <body>
+    <label for="rumah">Tipe Rumah (Rose, Gold, Platinum)</label>
+    <input type="text" id="rumah" />
+    <label for="kredit">Lama Kredit (bulan)</label>
+    <input type="number" id="kredit" />
+    <button id="submit">Submit</button>
+    <ul>
+      <li class="tipe"></li>
+      <li class="harga"></li>
+      <li class="uang-muka"></li>
+      <li class="uang-sisa"></li>
+      <li class="lama-kredit"></li>
+      <li class="angsuran"></li>
+    </ul>
+
+    <table border="1">
+      <tr>
+        <th>Bulan Ke</th>
+        <th>Angsuran</th>
+        <th>Sisa</th>
+      </tr>
+    </table>
+
+    <script>
+      const elTipe = document.querySelector(".tipe");
+      const elHarga = document.querySelector(".harga");
+      const elUangMuka = document.querySelector(".uang-muka");
+      const elUangSisa = document.querySelector(".uang-sisa");
+      const elLamaKredit = document.querySelector(".lama-kredit");
+      const elAngsuran = document.querySelector(".angsuran");
+      const table = document.querySelector("table");
+
+      let harga;
+      const pilihRumah = (tipeRumah, kredit) => {
+        switch (tipeRumah) {
+          case "Rose":
+            harga = 120000000;
+            hitungKredit(harga, kredit);
+            elTipe.innerText = `Tipe Rumah : ${tipeRumah}`;
+            break;
+          case "Gold":
+            harga = 300000000;
+            hitungKredit(harga, kredit);
+            elTipe.innerText = `Tipe Rumah : ${tipeRumah}`;
+
+            break;
+          case "Platinum":
+            harga = 360000000;
+            hitungKredit(harga, kredit);
+            elTipe.innerText = `Tipe Rumah : ${tipeRumah}`;
+
+            break;
+          default:
+            alert("input error");
+            break;
+        }
+      };
+      const hitungKredit = (harga, kredit) => {
+        const uangMuka = harga * 0.2;
+        const uangSisa = harga - uangMuka;
+        const angsuran = uangSisa / parseInt(kredit);
+        elHarga.innerText = `Harga Rumah : ${harga}`;
+        elUangMuka.innerText = `Uang Muka : ${uangMuka}`;
+        elUangSisa.innerText = `Uang Sisa : ${uangSisa}`;
+        elLamaKredit.innerText = `Lama kredit : ${kredit} bulan`;
+        elAngsuran.innerText = `Angsuran : ${angsuran.toString()}`;
+        let i = 0;
+        for (let index = uangSisa; index >= 0; index = index - angsuran) {
+          i++;
+          if (index !== uangSisa) {
+            const tableRow = document.createElement("tr");
+            row = `
+                  <td>${i - 1}</td>
+                  <td>${angsuran}</td>
+                  <td>${index}</td>
+                `;
+            tableRow.innerHTML = row;
+            table.appendChild(tableRow);
+          }
+        }
+      };
+
+      const clearTable = () => {
+        const clear = `
+          <tr>
+            <th>Bulan Ke</th>
+            <th>Angsuran</th>
+            <th>Sisa</th>
+          </tr>
+          `;
+        table.innerHTML = clear;
+      };
+
+      document.querySelector("#submit").addEventListener("click", () => {
+        const rumah = document.querySelector("#rumah").value;
+        const kredit = document.querySelector("#kredit").value;
+        clearTable();
+        pilihRumah(rumah, kredit);
+      });
+    </script>
+  </body>
+</html>
