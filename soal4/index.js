@@ -18,9 +18,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.send("login");
+  res.sendFile(path.join(__dirname, "/src/login.html"));
 });
 
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+});
 app.get("/all", (req, res) => {
   sql.get("school_tb", (result) => {
     res.send(result);
