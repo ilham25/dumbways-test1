@@ -1,28 +1,31 @@
-// const readline = require("readline");
+const readline = require("readline");
 
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-// });
+const pola = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-// // rl.question("masukkan nama", (name) => {
-// //   console.log(name);
-// // });
+pola.question("Masukkan banyak pola : ", (pattern) => {
+  printPattern(parseInt(pattern));
+});
 
-// const diamond = `
-//     *
-//    * *
-//   *   *
-//    * *
-//     *
-// `;
+const printPattern = (inputPola) => {
+  let d1 = "     *     ";
+  let d2 = "   *   *   ";
+  let d3 = "  *     *  ";
+  let pr1 = "";
+  let pr2 = "";
+  let pr3 = "";
 
-// const star = "* ";
-// for (let index = 0; index < 5; index++) {}
-
-for (var i = 1; i <= 5; i++) {
-  for (var j = 1; j <= i; j++) {
-    console.log("*");
+  for (let index = 0; index < inputPola; index++) {
+    pr1 += d1;
+    pr2 += d2;
+    pr3 += d3;
   }
-  console.log("\n");
-}
+
+  console.log(pr1);
+  console.log(pr2);
+  console.log(pr3);
+  console.log(pr2);
+  console.log(pr1);
+};
