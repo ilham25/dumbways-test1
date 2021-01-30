@@ -28,6 +28,8 @@ export default function DashboardPage({ history }) {
   const handleEditClose = () => setEditShow(false);
   const handleEditShow = () => setEditShow(true);
 
+  const [schoolId, setSchoolId] = useState();
+
   useEffect(() => {
     getSchoolData();
   }, []);
@@ -65,6 +67,7 @@ export default function DashboardPage({ history }) {
               level={school.school_level}
               usId={school.user_id}
               handleShow={handleEditShow}
+              setSchoolId={setSchoolId}
             />
           ))}
         </Row>
@@ -73,9 +76,13 @@ export default function DashboardPage({ history }) {
       <UpdateModal
         show={editShow}
         handleClose={handleEditClose}
+        schId={schoolId}
+      />
+      <InsertModal
+        show={show}
+        handleClose={handleClose}
         update={getSchoolData}
       />
-      <InsertModal show={show} handleClose={handleClose} />
     </>
   );
 }

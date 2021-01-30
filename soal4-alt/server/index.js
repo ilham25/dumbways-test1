@@ -6,7 +6,7 @@ import Sql from "./database.js";
 const sql = Sql();
 
 const app = Express();
-const port = 3001;
+const port = 3030;
 
 app.use(Cors());
 app.use(Express.json());
@@ -55,7 +55,6 @@ app.post("/school", (req, res) => {
     }
   );
 });
-
 app.delete("/school/:id", (req, res) => {
   sql.deleteData("school_tb", req.params.id, (result) => {
     if (result.affectedRows > 0) {
@@ -65,6 +64,13 @@ app.delete("/school/:id", (req, res) => {
     }
   });
 });
+
+app.get("/edit/:id", (req, res) => {
+  sql.get("school_tb", { key: "id", value: req.params.id }, (result) => {
+    res.send({ status: 200, data: result[0] });
+  });
+});
+
 app.listen(port, () => {
   console.log(`running on port ${port}`);
 });

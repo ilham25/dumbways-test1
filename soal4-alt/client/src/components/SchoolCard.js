@@ -11,6 +11,7 @@ export default function SchoolCard({
   npsn,
   usId,
   handleShow,
+  setSchoolId,
 }) {
   const apiDelete = async (dataId) => {
     const response = await api.delete(`/school/${dataId}`);
@@ -31,20 +32,25 @@ export default function SchoolCard({
       }
     }
   };
+
+  const handleEdit = () => {
+    setSchoolId(id);
+    handleShow();
+  };
   return (
     <Col md={3} className="mb-3">
       <Card>
-        {/* <Card.Img
+        <Card.Img
           variant="top"
           src={`https://picsum.photos/600?random=${id}`}
-        /> */}
+        />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <small>{npsn}</small>
           <Card.Text>{level}</Card.Text>
           <Card.Text>{address}</Card.Text>
           <Button variant="primary mr-1">Detail</Button>
-          <Button variant="warning mr-1" onClick={handleShow}>
+          <Button variant="warning mr-1" onClick={handleEdit}>
             Edit
           </Button>
           <Button variant="danger" onClick={handleDelete}>

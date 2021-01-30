@@ -27,14 +27,20 @@ export default function UpdateModal({ show, handleClose, schId }) {
   };
 
   const getData = async () => {
-    const response = await api.get(`/school/${schId}`);
+    const response = await api.get(`/edit/${schId}`);
     const data = await response.data;
+    try {
+      const { name_school, npsn, address, school_level } = data.data;
+      setName(name_school);
+      setNpsn(npsn);
+      setAddress(address);
+      setLevel(school_level);
+    } catch (error) {}
   };
 
   useEffect(() => {
     getData();
-  }, []);
-
+  }, [show]);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -96,8 +102,11 @@ export default function UpdateModal({ show, handleClose, schId }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          {/* <Button variant="secondary" onClick={cek}>
+            cek
+          </Button> */}
           <Button variant="primary" type="submit">
-            Submit
+            Edit
           </Button>
         </Modal.Footer>
       </Form>

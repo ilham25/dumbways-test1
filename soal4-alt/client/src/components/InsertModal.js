@@ -14,6 +14,7 @@ export default function InsertModal({ show, handleClose, update }) {
     const data = await response.data;
     if (data.status === 200) {
       alert("Input Data Sukses");
+      update();
     }
   };
 
