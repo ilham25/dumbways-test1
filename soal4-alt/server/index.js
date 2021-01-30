@@ -65,9 +65,21 @@ app.delete("/school/:id", (req, res) => {
   });
 });
 
-app.get("/edit/:id", (req, res) => {
+app.get("/school/:id", (req, res) => {
   sql.get("school_tb", { key: "id", value: req.params.id }, (result) => {
     res.send({ status: 200, data: result[0] });
+  });
+});
+
+app.put("/school", (req, res) => {
+  const { name, npsn, address, level, schId } = req.body;
+  console.log(name, npsn, address, level);
+  sql.updateData(schId, [name, parseInt(npsn), address, level], (result) => {
+    if (result.affectedRows > 0) {
+      res.send({ status: 200 });
+    } else {
+      res.send({ status: 500 });
+    }
   });
 });
 

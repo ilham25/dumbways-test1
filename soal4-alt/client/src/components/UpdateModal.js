@@ -3,17 +3,18 @@ import { useState, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import api from "../utils/api";
 
-export default function UpdateModal({ show, handleClose, schId }) {
+export default function UpdateModal({ show, handleClose, schId, update }) {
   const [name, setName] = useState("");
   const [npsn, setNpsn] = useState("");
   const [address, setAddress] = useState("");
   const [level, setLevel] = useState("");
 
-  const handleInsert = async (insertData) => {
-    const response = await api.post("/school", insertData);
+  const handleUpdate = async (insertData) => {
+    const response = await api.put("/school", insertData);
     const data = await response.data;
     if (data.status === 200) {
-      alert("Input Data Sukses");
+      alert("Edit Data Sukses");
+      update();
     }
   };
 
@@ -22,12 +23,12 @@ export default function UpdateModal({ show, handleClose, schId }) {
     console.log({ name, npsn, address, level });
     const TOKEN_KEY = "temp_key";
     const userId = JSON.parse(localStorage.getItem(TOKEN_KEY)).userId;
-    handleInsert({ name, npsn, address, level, userId });
+    handleUpdate({ name, npsn, address, level, schId });
     handleClose();
   };
 
   const getData = async () => {
-    const response = await api.get(`/edit/${schId}`);
+    const response = await api.get(`/school/${schId}`);
     const data = await response.data;
     try {
       const { name_school, npsn, address, school_level } = data.data;
@@ -65,6 +66,7 @@ export default function UpdateModal({ show, handleClose, schId }) {
             <Form.Label>NPSN</Form.Label>
             <Form.Control
               type="number"
+              maxLength="10"
               placeholder="Enter NPSN"
               value={npsn}
               onChange={(e) => {
@@ -105,7 +107,7 @@ export default function UpdateModal({ show, handleClose, schId }) {
           {/* <Button variant="secondary" onClick={cek}>
             cek
           </Button> */}
-          <Button variant="primary" type="submit">
+          <Button variant="warning" type="submit">
             Edit
           </Button>
         </Modal.Footer>

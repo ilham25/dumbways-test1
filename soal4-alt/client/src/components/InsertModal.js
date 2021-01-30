@@ -51,6 +51,7 @@ export default function InsertModal({ show, handleClose, update }) {
             <Form.Label>NPSN</Form.Label>
             <Form.Control
               type="number"
+              maxLength="10"
               placeholder="Enter NPSN"
               value={npsn}
               onChange={(e) => {

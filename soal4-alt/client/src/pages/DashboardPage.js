@@ -68,6 +68,7 @@ export default function DashboardPage({ history }) {
               usId={school.user_id}
               handleShow={handleEditShow}
               setSchoolId={setSchoolId}
+              update={getSchoolData}
             />
           ))}
         </Row>
@@ -77,6 +78,7 @@ export default function DashboardPage({ history }) {
         show={editShow}
         handleClose={handleEditClose}
         schId={schoolId}
+        update={getSchoolData}
       />
       <InsertModal
         show={show}

@@ -40,10 +40,18 @@ export default function Sql() {
       cb(res);
     });
   };
+  const updateData = (schId, data, cb) => {
+    const query = `UPDATE school_tb SET name_school=?,npsn=?,address=?,school_level=? WHERE id=${schId}`;
+    db.query(query, data, (err, res) => {
+      if (err) throw err;
+      cb(res);
+    });
+  };
   return {
     getAll,
     get,
     insertSchool,
     deleteData,
+    updateData,
   };
 }

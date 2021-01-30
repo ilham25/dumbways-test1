@@ -12,12 +12,14 @@ export default function SchoolCard({
   usId,
   handleShow,
   setSchoolId,
+  update,
 }) {
   const apiDelete = async (dataId) => {
     const response = await api.delete(`/school/${dataId}`);
     const data = await response.data;
     if (data.status === 200) {
-      alert("Input Data Sukses");
+      alert("Delete Data Sukses");
+      update();
     }
   };
 
