@@ -26,7 +26,7 @@ export default function DashboardPage({ history }) {
   // Update Modal Handler
   const [editShow, setEditShow] = useState(false);
   const handleEditClose = () => setEditShow(false);
-  const handleEditShow = () => setEditShow(false);
+  const handleEditShow = () => setEditShow(true);
 
   useEffect(() => {
     getSchoolData();
@@ -70,7 +70,7 @@ export default function DashboardPage({ history }) {
         </Row>
       </Container>
 
-      <InsertModal
+      <UpdateModal
         show={editShow}
         handleClose={handleEditClose}
         update={getSchoolData}
