@@ -30,14 +30,21 @@ export default function SchoolCard({
       if (usId === userId) {
         apiDelete(id);
       } else {
-        alert("Can't delete school");
+        alert("Can't delete school (USER RESTRICTED)");
       }
     }
   };
 
   const handleEdit = () => {
-    setSchoolId(id);
-    handleShow();
+    const TOKEN_KEY = "temp_key";
+    const userId = JSON.parse(localStorage.getItem(TOKEN_KEY)).userId;
+
+    if (usId === userId) {
+      setSchoolId(id);
+      handleShow();
+    } else {
+      alert("Can't edit school (USER RESTRICTED)");
+    }
   };
   return (
     <Col md={3} className="mb-3">
