@@ -88,7 +88,7 @@ export default function UpdateModal({ show, handleClose, schId, update }) {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Level</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter Level"
