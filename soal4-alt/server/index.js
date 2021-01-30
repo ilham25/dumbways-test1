@@ -1,4 +1,5 @@
 import Express from "express";
+import Cors from "cors";
 
 import Sql from "./database.js";
 
@@ -7,13 +8,13 @@ const sql = Sql();
 const app = Express();
 const port = 3001;
 
+app.use(Cors());
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("/");
   sql.getAll("school_tb", (result) => {
-    console.log(result);
+    res.send(result);
   });
 });
 app.post("/login", (req, res) => {
@@ -37,6 +38,11 @@ app.post("/login", (req, res) => {
       });
     }
   });
+});
+
+app.post("/school", (req, res) => {
+  const { name, npsn, address, level } = req.body;
+  console.log({ name, npsn, address, level });
 });
 app.listen(port, () => {
   console.log(`running on port ${port}`);

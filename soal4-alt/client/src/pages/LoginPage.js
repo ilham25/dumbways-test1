@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Button, Card, Container, Row, Col, Form } from "react-bootstrap";
 import TopBar from "../components/TopBar";
 
+import api from "../utils/api";
+
 import { login } from "../utils/auth";
 
 function LoginPage({ history }) {
@@ -12,12 +14,25 @@ function LoginPage({ history }) {
     setEmail("");
     setPassword("");
   };
+
+  const handleLogin = async (loginData) => {
+    const { email, password } = loginData;
+    const response = await api.post("/login", { email, password });
+    const data = response.data;
+
+    if (data.status === 200) {
+      login({ email });
+      history.push("/");
+      clearForm();
+    } else {
+      alert("Wrong email or password");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password });
-    login({ email });
-    history.push("/");
-    clearForm();
+    handleLogin({ email, password });
   };
 
   return (

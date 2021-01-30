@@ -1,32 +1,64 @@
-import { useState } from "react";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Button, Container, Row } from "react-bootstrap";
+
+import { logout } from "../utils/auth";
+import api from "../utils/api";
 
 import TopBar from "../components/TopBar";
+import SchoolCard from "../components/SchoolCard";
+import InsertModal from "../components/InsertModal";
 
-export default function DashboardPage() {
+export default function DashboardPage({ history }) {
+  const [schools, setSchools] = useState([]);
+
+  const getSchoolData = async () => {
+    const response = await api.get("/");
+    const data = await response.data;
+    setSchools(data);
+  };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    getSchoolData();
+  }, []);
+
   return (
     <>
       <TopBar>
-        <Button className="btn btn-primary">Add School</Button>
+        <Button variant="primary" onClick={handleShow}>
+          Add School
+        </Button>
+        <Button
+          className="ml-2"
+          variant="success"
+          onClick={() => {
+            logout();
+            history.push("/login");
+          }}
+        >
+          Logout
+        </Button>
       </TopBar>
 
       <Container className="mt-5">
         <Row>
-          <Col md={3}>
-            <Card>
-              <Card.Img variant="top" src="https://picsum.photos/150" />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </Col>
+          {schools.map((school) => (
+            <SchoolCard
+              key={school.id}
+              name={school.name_school}
+              npsn={school.npsn}
+              address={school.address}
+              logo={school.logo_school}
+              level={school.school_level}
+            />
+          ))}
         </Row>
       </Container>
+      <InsertModal show={show} handleClose={handleClose} />
     </>
   );
 }

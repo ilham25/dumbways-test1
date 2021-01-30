@@ -17,6 +17,9 @@ export default function Sql() {
     });
   };
 
+  const insertSchool = (data) => {
+    const query = `INSERT INTO school_tb (npsn, name_school, address, logo_school, school_level, user_id) VALUES (?,?,?,?,?,?)`;
+  };
   const get = (table, data, cb) => {
     const { key, value } = data;
     const query = `SELECT * FROM ${table} WHERE ${key}=?`;
